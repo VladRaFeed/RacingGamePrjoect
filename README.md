@@ -4,6 +4,8 @@ This repo created for pet project. This project im created for my portfolio and 
 # Diagramms: 
 - 1) UseCase Diagramm
 
+    ![use-case](/Diagramms/use-case-race.png)
+
 - 2) Activity Diagramm
 
 - 3) Class Diagramm
