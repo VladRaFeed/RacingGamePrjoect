@@ -8,4 +8,8 @@ This repo created for pet project. This project im created for my portfolio and 
 
 - 2) Activity Diagramm
 
+    ![activity](/Diagramms/activity.png)
+
 - 3) Class Diagramm
+
+    ![classes](/Diagramms/ClassesRace.png)
