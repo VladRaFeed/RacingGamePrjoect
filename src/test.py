@@ -1,4 +1,7 @@
 import pygame
+import random
+
+pygame.init()
 
 FPS = pygame.time.Clock()
 FPS.tick(60)
@@ -7,13 +10,15 @@ screen_width = 800
 screen_hight = 600
 size = [800, 600]
 
+white = (255, 255, 255)
+
 screen = pygame.display.set_mode(size) # встановлення розміру дісплея
 pygame.display.set_caption("Гонка") # назва вікна
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("car.png")
+        self.image = pygame.image.load("src/img/car.png")
         self.rect = self.image.get_rect()
         self.rect.center = (160, 520)
 
@@ -30,14 +35,36 @@ class Player(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-# class Enemy(pygame.sprite.Sprite):
-#     def __init__(self):
-#         super().__init__()
-#         self.image = pygame.image.load("enemy_car.png")
-#         self.rect = self.image.get_rect()
-#         self.rect.center = (50, screen.)
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load("src/img/enemy_car.png")
+        self.rect = self.image.get_rect()
+        self.rect.center = (random.randint(50, screen_width-50), 0)
+
+    def move(self):
+        self.rect.move_ip(0, 10)
+        if (self.rect.top > 600):
+            self.rect.top = 0
+            self.rect.center = (random.randint(40, 100), 0)
+
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
+
+P1 = Player()
+E1 = Enemy()
 
 while True: # умова запуску програми 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   # завершення програми натиском на крестик
             pygame.quit()
+
+    P1.car_update()
+    E1.move()
+
+    screen.fill(white)
+    P1.draw(screen)
+    E1.draw(screen)
+
+    pygame.display.update()
+    
