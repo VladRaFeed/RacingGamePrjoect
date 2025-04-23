@@ -1,16 +1,19 @@
 import pygame
 
-pygame.init()
+FPS = pygame.time.Clock()
+FPS.tick(60)
 
-size = [400, 600]
+screen_width = 800
+screen_hight = 600
+size = [800, 600]
 
 screen = pygame.display.set_mode(size) # встановлення розміру дісплея
-pygame.display.set_caption("Моя гра") # назва вікна
+pygame.display.set_caption("Гонка") # назва вікна
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(car.png)
+        self.image = pygame.image.load("car.png")
         self.rect = self.image.get_rect()
         self.rect.center = (160, 520)
 
@@ -27,8 +30,14 @@ class Player(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
+# class Enemy(pygame.sprite.Sprite):
+#     def __init__(self):
+#         super().__init__()
+#         self.image = pygame.image.load("enemy_car.png")
+#         self.rect = self.image.get_rect()
+#         self.rect.center = (50, screen.)
 
 while True: # умова запуску програми 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   # завершення програми натиском на крестик
-            quit()
+            pygame.quit()
