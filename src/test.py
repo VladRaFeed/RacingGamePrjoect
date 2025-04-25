@@ -52,20 +52,27 @@ class Enemy(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-P1 = Player()
-E1 = Enemy()
+Pl = Player()
+En = Enemy()
+
+all_enemies = pygame.sprite.Group()
+all_enemies.add(En)
+
+all_cars = pygame.sprite.Group()
+all_cars.add(Pl)
+all_cars.add(En)
 
 while True: # умова запуску програми 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   # завершення програми натиском на крестик
             pygame.quit()
 
-    P1.car_update()
-    E1.move()
+    Pl.car_update()
+    En.move()
 
     screen.fill(white)
-    P1.draw(screen)
-    E1.draw(screen)
+    Pl.draw(screen)
+    En.draw(screen)
 
     pygame.display.update()
     FPS.tick(60)
