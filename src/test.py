@@ -11,8 +11,8 @@ size = [800, 600]
 
 white = (255, 255, 255)
 
-screen = pygame.display.set_mode(size) # встановлення розміру дісплея
-pygame.display.set_caption("Гонка") # назва вікна
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Гонка") 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -20,7 +20,7 @@ class Player(pygame.sprite.Sprite):
         image = pygame.image.load("src/img/car.png")
         self.image = pygame.transform.scale(image, (60, 120))
         self.rect = self.image.get_rect()
-        self.rect.center = (160, 520)
+        self.rect.center = (400, 543)
 
     def move(self):
         pressed_key = pygame.key.get_pressed()
@@ -31,7 +31,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.right < 800:
             if pressed_key[pygame.K_d]:
                 self.rect.move_ip(5,  0)
-
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
@@ -57,11 +56,10 @@ all_cars = pygame.sprite.Group()
 all_cars.add(Pl)
 all_cars.add(En)
 
-while True: # умова запуску програми 
+while True: 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:   # завершення програми натиском на крестик
+        if event.type == pygame.QUIT:
             pygame.quit()
-
 
     screen.fill(white)
 
