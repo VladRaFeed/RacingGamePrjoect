@@ -12,13 +12,16 @@ size = [800, 600]
 white = (255, 255, 255)
 
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Гонка") 
+pygame.display.set_caption("Гонки") 
+back_picture = pygame.image.load("src/img/game_back.jpg")
+transform_back_picture = pygame.transform.scale(back_picture, (800, 600))
+back_y = 0
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         image = pygame.image.load("src/img/car.png")
-        self.image = pygame.transform.scale(image, (60, 120))
+        self.image = pygame.transform.scale(image, (90, 180))
         self.rect = self.image.get_rect()
         self.rect.center = (400, 543)
 
@@ -36,15 +39,15 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         image = pygame.image.load("src/img/enemy_car.png")
-        self.image = pygame.transform.scale(image, (70, 120))
+        self.image = pygame.transform.scale(image, (100, 180))
         self.rect = self.image.get_rect()
-        self.rect.center = (random.randint(50, screen_width-50), 0)
+        self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
     def move(self):
         self.rect.move_ip(0, 10)
         if (self.rect.top > 600):
             self.rect.top = 0
-            self.rect.center = (random.randint(40, 760), 0)
+            self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
 Pl = Player()
 En = Enemy()   
@@ -61,7 +64,13 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
 
-    screen.fill(white)
+    screen.blit(transform_back_picture, (0, back_y))
+    screen.blit(transform_back_picture, (0, back_y - 600))
+
+    back_y += 2
+    if back_y > 600:
+        back_y = 0
+
 
     for each_car in all_cars:
         screen.blit(each_car.image, each_car.rect)
