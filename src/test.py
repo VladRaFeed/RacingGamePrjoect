@@ -8,6 +8,9 @@ FPS = pygame.time.Clock()
 screen_width = 800
 screen_hight = 600
 size = [800, 600]
+score = 0
+
+score_font = pygame.font.SysFont("elephant", 50)
 
 white = (255, 255, 255)
 
@@ -23,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         image = pygame.image.load("src/img/car.png")
         self.image = pygame.transform.scale(image, (90, 180))
         self.rect = self.image.get_rect()
-        self.rect.center = (400, 543)
+        self.rect.center = (400, 520)
 
     def move(self):
         pressed_key = pygame.key.get_pressed()
@@ -44,8 +47,10 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
     def move(self):
+        global score
         self.rect.move_ip(0, 10)
         if (self.rect.top > 600):
+            score += 1
             self.rect.top = 0
             self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
@@ -67,10 +72,12 @@ while True:
     screen.blit(transform_back_picture, (0, back_y))
     screen.blit(transform_back_picture, (0, back_y - 600))
 
+    score_print = score_font.render(str(score), True, (100, 255, 100))
+    screen.blit(score_print, (40, 40))
+
     back_y += 2
     if back_y > 600:
         back_y = 0
-
 
     for each_car in all_cars:
         screen.blit(each_car.image, each_car.rect)
