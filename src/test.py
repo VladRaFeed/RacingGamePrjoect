@@ -1,5 +1,5 @@
 import pygame
-import random
+import random, time
 
 pygame.init()
 
@@ -73,6 +73,14 @@ while True: # умова запуску програми
     screen.fill(white)
     Pl.draw(screen)
     En.draw(screen)
+
+    if pygame.sprite.spritecollideany(Pl, all_enemies):
+        screen.fill(white)
+        pygame.display.update()
+        for each_car in all_cars:
+            each_car.kill()
+        time.sleep(2)
+        pygame.quit()
 
     pygame.display.update()
     FPS.tick(60)
