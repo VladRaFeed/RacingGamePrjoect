@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (160, 520)
 
-    def car_update(self):
+    def move(self):
         pressed_key = pygame.key.get_pressed()
         if self.rect.left > 0:
             if pressed_key[pygame.K_a]:
@@ -32,8 +32,6 @@ class Player(pygame.sprite.Sprite):
             if pressed_key[pygame.K_d]:
                 self.rect.move_ip(5,  0)
 
-    def draw(self, surface):
-        surface.blit(self.image, self.rect)
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
@@ -48,9 +46,6 @@ class Enemy(pygame.sprite.Sprite):
         if (self.rect.top > 600):
             self.rect.top = 0
             self.rect.center = (random.randint(40, 760), 0)
-
-    def draw(self, surface):
-        surface.blit(self.image, self.rect)
 
 Pl = Player()
 En = Enemy()   
@@ -67,12 +62,12 @@ while True: # умова запуску програми
         if event.type == pygame.QUIT:   # завершення програми натиском на крестик
             pygame.quit()
 
-    Pl.car_update()
-    En.move()
 
     screen.fill(white)
-    Pl.draw(screen)
-    En.draw(screen)
+
+    for each_car in all_cars:
+        screen.blit(each_car.image, each_car.rect)
+        each_car.move()
 
     if pygame.sprite.spritecollideany(Pl, all_enemies):
         screen.fill(white)
