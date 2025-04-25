@@ -28,9 +28,9 @@ class Player(pygame.sprite.Sprite):
             if pressed_key[pygame.K_a]:
                 self.rect.move_ip(-5, 0)
 
-        if self.rect.right > 0:
+        if self.rect.right < 800:
             if pressed_key[pygame.K_d]:
-                self.rect.move_ip(0,  5)
+                self.rect.move_ip(5,  0)
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -53,7 +53,7 @@ class Enemy(pygame.sprite.Sprite):
         surface.blit(self.image, self.rect)
 
 Pl = Player()
-En = Enemy()
+En = Enemy()   
 
 all_enemies = pygame.sprite.Group()
 all_enemies.add(En)
