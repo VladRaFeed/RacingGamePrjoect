@@ -24,7 +24,23 @@ text_score = small_font.render('Score', True, color)
 
 while True: 
     
-    
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            pygame.quit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print("down")
+            print(mouse)
+
+            #Play action
+
+            #Score action
+
+            #Quit action
+            if width/2-90 <= mouse[0] <= width/2+50 and height/2+80 <= mouse[1] <= height/2+120:
+                pygame.quit()
+
 
     screen.fill((0,0,0))
 
