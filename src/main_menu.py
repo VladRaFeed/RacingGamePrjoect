@@ -24,9 +24,33 @@ text_score = small_font.render('Score', True, color)
 
 while True: 
     
+    
+
     screen.fill((0,0,0))
 
     mouse = pygame.mouse.get_pos()
+  
+    #play btn
+    if width/2-90 <= mouse[0] <= width/2+50 and height/2-60 <= mouse[1] <= height/2-20:
+        pygame.draw.rect(screen, light, [width/2-90, height/2-60, 140, 40])
+    
+    else:
+        pygame.draw.rect(screen, dark, [width/2-90, height/2-60, 140, 40])
+
+    #Score btn
+    if width/2-90 <= mouse[0] <= width/2+50 and height/2+10 <= mouse[1] <= height/2+50:
+        pygame.draw.rect(screen, light, [width/2-90, height/2+10, 140, 40])
+    
+    else:
+        pygame.draw.rect(screen, dark, [width/2-90, height/2+10, 140, 40])
+
+    #quit btn
+    if width/2-90 <= mouse[0] <= width/2+50 and height/2+80 <= mouse[1] <= height/2+120:  
+        pygame.draw.rect(screen, light, [width/2-90, height/2+80, 140, 40])  
+          
+    else:  
+        pygame.draw.rect(screen, dark, [width/2-90, height/2+80, 140, 40])
+
 
     screen.blit(text_play, (width/2-50, height/2-60))
     screen.blit(text_score, (width/2-60, height/2+10))
