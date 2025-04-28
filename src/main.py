@@ -1,5 +1,6 @@
 import pygame
 import random, time
+import score.score as score
 
 pygame.init()
 
@@ -8,7 +9,7 @@ FPS = pygame.time.Clock()
 screen_width = 800
 screen_hight = 600
 size = [800, 600]
-score = 0
+game_score = 0
 
 score_font = pygame.font.SysFont("elephant", 50)
 
@@ -47,15 +48,16 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
     def move(self):
-        global score
+        global game_score
         self.rect.move_ip(0, 10)
         if (self.rect.top > 600):
-            score += 1
+            game_score += 1
             self.rect.top = 0
             self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
 Pl = Player()
 En = Enemy()   
+score_board = score.Scoreboard()
 
 all_enemies = pygame.sprite.Group()
 all_enemies.add(En)
@@ -72,7 +74,7 @@ while True:
     screen.blit(transform_back_picture, (0, back_y))
     screen.blit(transform_back_picture, (0, back_y - 600))
 
-    score_print = score_font.render(str(score), True, (100, 255, 100))
+    score_print = score_font.render(str(game_score), True, (100, 255, 100))
     screen.blit(score_print, (40, 40))
 
     back_y += 2
@@ -89,6 +91,7 @@ while True:
         for each_car in all_cars:
             each_car.kill()
         time.sleep(2)
+        score_board.saveScore(game_score)
         pygame.quit()
 
     pygame.display.update()
