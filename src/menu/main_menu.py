@@ -18,9 +18,9 @@ height = screen.get_height()
 
 small_font = pygame.font.SysFont('Arial', 35)
 
-text_quit = small_font.render('Quit', True, color)
 text_play = small_font.render('Play!', True, color)
 text_score = small_font.render('Score', True, color)
+text_quit = small_font.render('Quit', True, color)
 
 while True: 
     
