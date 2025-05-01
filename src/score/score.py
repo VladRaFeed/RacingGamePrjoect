@@ -55,6 +55,7 @@ client = MongoClient(MONGO_URL)
 db = client.racingDb
 collection = db.score
 
+
 def get_scores():
     scores = collection.find().sort("score", -1).limit(10)  # Сортуємо за спаданням і беремо топ-10
     return list(scores)
@@ -62,6 +63,10 @@ def get_scores():
 class Scoreboard:
     def __init__(self):
         self.scores = get_scores()
+        
+    def saveScore(self, score):
+        print(score)
+
 
     def draw(self, screen):
         screen.fill(BLACK)
@@ -79,29 +84,3 @@ class Scoreboard:
             score_rect = score_text.get_rect(center=(screen_width // 2, y_offset))
             screen.blit(score_text, score_rect)
             y_offset += 40
-
-        exit_text = small_font.render("Press ESC to exit", True, GRAY)
-        exit_rect = exit_text.get_rect(center=(screen_width // 2, screen_hight - 50))
-        screen.blit(exit_text, exit_rect)
-        
-# def main():
-#     scoreboard = Scoreboard()
-#     running = True
-#     clock = pygame.time.Clock()
-
-#     while running:
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-#             if event.type == pygame.KEYDOWN:
-#                 if event.key == pygame.K_ESCAPE:
-#                     running = False
-
-#         scoreboard.draw(screen)
-#         pygame.display.flip()
-#         clock.tick(60)
-
-#     pygame.quit()
-
-# if __name__ == "__main__":
-#     main()
