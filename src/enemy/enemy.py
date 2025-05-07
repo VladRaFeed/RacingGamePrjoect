@@ -14,9 +14,8 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
     def move(self):
-        global game_score
         self.rect.move_ip(0, 10)
         if (self.rect.top > 600):
-            game_score += 1
+            # game_score += 1
             self.rect.top = 0
             self.rect.center = ((random.randint(120, (screen_width-120))), 0)
