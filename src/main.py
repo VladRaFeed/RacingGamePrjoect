@@ -96,6 +96,3 @@ while True:
 
     pygame.display.update()
     FPS.tick(60)
-
-if __name__ == "__main__":
-    main()
