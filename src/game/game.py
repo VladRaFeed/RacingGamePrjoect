@@ -3,7 +3,7 @@ import time
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# import score.score as score
+import score.score as score
 from player.player import Player
 from enemy.enemy import Enemy
 
@@ -30,7 +30,7 @@ def start_game():
 
     Pl = Player()
     En = Enemy()   
-    # score_board = score.Scoreboard()
+    score_board = score.Scoreboard()
 
     all_enemies = pygame.sprite.Group()
     all_enemies.add(En)
@@ -57,6 +57,7 @@ def start_game():
         for each_car in all_cars:
             screen.blit(each_car.image, each_car.rect)
             each_car.move()
+            game_score = En.game_score
 
         if pygame.sprite.spritecollideany(Pl, all_enemies):
             screen.fill(white)
@@ -64,7 +65,7 @@ def start_game():
             for each_car in all_cars:
                 each_car.kill()
             time.sleep(2)
-            # score_board.saveScore(game_score)
+            score_board.saveScore(En.game_score)
             pygame.quit()
 
         pygame.display.update()

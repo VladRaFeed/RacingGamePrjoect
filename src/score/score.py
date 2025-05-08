@@ -65,7 +65,7 @@ class Scoreboard:
         self.scores = get_scores()
         
     def saveScore(self, score):
-        print(score)
+        print(f"yoyr score: {score}")
 
 
     def draw(self, screen):
