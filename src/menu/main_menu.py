@@ -108,6 +108,11 @@ def start_menu():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+                        switch_scene(scene1)
+
 
             scoreboard.draw(screen)
             pygame.display.flip()
