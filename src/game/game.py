@@ -70,5 +70,3 @@ def start_game():
 
         pygame.display.update()
         FPS.tick(60)
-
-start_game()
