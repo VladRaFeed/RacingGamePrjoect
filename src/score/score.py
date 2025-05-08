@@ -1,39 +1,8 @@
-# import os
-# from dotenv import load_dotenv
-# from pymongo import MongoClient
-# import pygame
-
-# load_dotenv()
-
-# MONGO_URL = os.getenv("MONGO_URL")
-
-# client = MongoClient(MONGO_URL)
-
-# db = client.racingDb
-# collection = db.score
-
-# # collections = db.list_collection_names()
-# # for name in collections:
-# #     print(f" - {name}")
-# # collection = db.score
-
-# elements = collection.find()
-
-# for element in elements:
-#     print(element)
-
-# class Scoreboard:
-#     def __init__(self):
-#         super().__init__()
-
-#     def saveScore(self, score):
-#         print(score)
-
-
 import os
 import pygame
 from dotenv import load_dotenv
 from pymongo import MongoClient
+import random
 
 pygame.init()
 
@@ -55,7 +24,6 @@ client = MongoClient(MONGO_URL)
 db = client.racingDb
 collection = db.score
 
-
 def get_scores():
     scores = collection.find().sort("score", -1).limit(10)  # Сортуємо за спаданням і беремо топ-10
     return list(scores)
@@ -65,7 +33,9 @@ class Scoreboard:
         self.scores = get_scores()
         
     def saveScore(self, score, name):
-        print(f"{name}: {score}")
+        score_obj = {"_id": (int(random.random() * 10000)), "name": name, "score": score}
+        collection.insert_one(score_obj)
+        print(score_obj)
 
 
     def draw(self, screen):
@@ -77,7 +47,7 @@ class Scoreboard:
 
         y_offset = 150
         for i, score in enumerate(self.scores):
-            player_name = score.get('player_name', 'Unknown')
+            player_name = score.get('name', 'Unknown')
             player_score = score.get('score', 0)
             
             score_text = small_font.render(f"{i + 1}. {player_name}: {player_score}", True, WHITE)
