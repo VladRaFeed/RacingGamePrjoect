@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import score.score as score
 from player.player import Player
 from enemy.enemy import Enemy
+from score.savescore import show_save_screen
 
 
 def start_game():
@@ -60,12 +61,10 @@ def start_game():
             game_score = En.game_score
 
         if pygame.sprite.spritecollideany(Pl, all_enemies):
-            screen.fill(white)
-            pygame.display.update()
             for each_car in all_cars:
                 each_car.kill()
-            time.sleep(2)
-            score_board.saveScore(En.game_score)
+            pygame.display.update()
+            show_save_screen(screen, En.game_score, score_board)
             pygame.quit()
 
         pygame.display.update()
