@@ -53,12 +53,12 @@ def start_menu():
         while running: 
             
             for event in pygame.event.get():
+                mouse = pygame.mouse.get_pos()
 
                 if event.type == pygame.QUIT:
                     running = False
                     switch_scene(None)
 
-                mouse = pygame.mouse.get_pos()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
 
@@ -77,7 +77,7 @@ def start_menu():
 
 
             screen.blit(transform_back_picture, (0,0))
-
+            mouse = pygame.mouse.get_pos()
             
             play_btn = pygame.Rect(width/2-90, height/2-60, 180, 50)
             score_btn = pygame.Rect(width/2-90, height/2+10, 180, 50)
