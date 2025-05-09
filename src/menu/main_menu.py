@@ -27,7 +27,6 @@ def draw_button(surface, rect, text, is_hovered):
     text_rect = text_surf.get_rect(center=rect.center)
     surface.blit(text_surf, text_rect)
 
-
 current_scene = None
 
 def switch_scene(scene):
@@ -41,7 +40,8 @@ def start_menu():
     screen_width = 800
     screen_height = 600
     
-
+    back_picture = pygame.image.load("src/img/menu_bcg.jpg")
+    transform_back_picture = pygame.transform.scale(back_picture, (800, 600))
     screen = pygame.display.set_mode((screen_width, screen_height))
 
     width = screen.get_width()
@@ -74,7 +74,7 @@ def start_menu():
                         sys.exit()
 
 
-            screen.fill((30,30,30))
+            screen.blit(transform_back_picture, (0,0))
 
             mouse = pygame.mouse.get_pos()
             
