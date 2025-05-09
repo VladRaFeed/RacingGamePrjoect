@@ -1,5 +1,6 @@
 import pygame
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -16,4 +17,4 @@ class Player(pygame.sprite.Sprite):
 
         if self.rect.right < 680:
             if pressed_key[pygame.K_d]:
-                self.rect.move_ip(5,  0)
+                self.rect.move_ip(5, 0)

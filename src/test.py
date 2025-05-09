@@ -15,7 +15,7 @@
 # white = (255, 255, 255)
 
 # screen = pygame.display.set_mode(size)
-# pygame.display.set_caption("Гонки") 
+# pygame.display.set_caption("Гонки")
 # back_picture = pygame.image.load("src/img/game_back.jpg")
 # transform_back_picture = pygame.transform.scale(back_picture, (800, 600))
 # back_y = 0
@@ -55,7 +55,7 @@
 #             self.rect.center = ((random.randint(120, (screen_width-120))), 0)
 
 # Pl = Player()
-# En = Enemy()   
+# En = Enemy()
 
 # all_enemies = pygame.sprite.Group()
 # all_enemies.add(En)
@@ -64,7 +64,7 @@
 # all_cars.add(Pl)
 # all_cars.add(En)
 
-# while True: 
+# while True:
 #     for event in pygame.event.get():
 #         if event.type == pygame.QUIT:
 #             pygame.quit()
@@ -93,10 +93,9 @@
 
 #     pygame.display.update()
 #     FPS.tick(60)
-    
-    
-    
-import pygame 
+
+
+import pygame
 
 pygame.init()
 
@@ -105,11 +104,14 @@ screen_height = 600
 
 current_scene = None
 
+
 def switch_scene(scene):
     global current_scene
     current_scene = scene
 
+
 screen = pygame.display.set_mode((screen_width, screen_height))
+
 
 def scene1():
     running = True
@@ -118,14 +120,15 @@ def scene1():
             if e.type == pygame.QUIT:
                 running = False
                 switch_scene(None)
-                
+
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_q:
                 switch_scene(scene2)
                 running = False
-                
-        screen.fill((255,0,0))
+
+        screen.fill((255, 0, 0))
         pygame.display.flip()
-        
+
+
 def scene2():
     running = True
     while running:
@@ -136,10 +139,11 @@ def scene2():
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_e:
                 switch_scene(scene1)
                 running = False
-                
-        screen.fill((0,255,0))
+
+        screen.fill((0, 255, 0))
         pygame.display.flip()
-        
+
+
 switch_scene(scene1)
 
 while current_scene is not None:

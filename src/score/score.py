@@ -32,26 +32,28 @@ client = MongoClient(MONGO_URL)
 db = client.racingDb
 collection = db.score
 
+
 def get_scores():
     scores = collection.find().sort("score", -1).limit(10)
     return list(scores)
 
+
 class Scoreboard:
     def __init__(self):
         self.scores = get_scores()
-        
+
     def saveScore(self, score, name):
-        score_obj = {"_id": (int(random.random() * 10000)), "name": name, "score": score}
+        score_obj = {"_id": (int(random.random() * 10000)),
+                     "name": name, "score": score}
         collection.insert_one(score_obj)
         print(score_obj)
-
 
     def draw(self, screen):
         screen.fill(DARK_BG)
 
         overlay = pygame.Surface((600, 400), pygame.SRCALPHA)
         overlay.fill(TRANSPARENT_GRAY)
-        screen.blit(transform_back_picture, (0,0))
+        screen.blit(transform_back_picture, (0, 0))
         screen.blit(overlay, (100, 100))
 
         title = font.render("Top 10 Players", True, GOLD)
@@ -72,6 +74,7 @@ class Scoreboard:
             screen.blit(text, text_rect)
 
             if i < len(self.scores) - 1:
-                pygame.draw.line(screen, LINE_COLOR, (150, y_offset + 25), (650, y_offset + 25), 1)
+                pygame.draw.line(
+                    screen, LINE_COLOR, (150, y_offset + 25), (650, y_offset + 25), 1)
 
             y_offset += 40

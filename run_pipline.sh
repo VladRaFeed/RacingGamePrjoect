@@ -1,39 +1,37 @@
 #!/bin/bash
 
-# Встановлення кольорів для виводу
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m' # Без кольору
-
 echo "Starting local CI/CD pipeline..."
 
-# Перевірка наявності віртуального оточення
-if [ -d "venv" ]; then
-    echo "Activating virtual environment..."
-    source venv/bin/activate
-else
-    echo "Creating and activating virtual environment..."
-    python3 -m venv venv
-    source venv/bin/activate
-fi
+# Activate virtual environment
+echo "Activating virtual environment..."
+source venv/bin/activate
 
-# Встановлення залежностей
+# Install dependencies
 echo "Installing dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Встановлення pre-commit
+# Create reports directory
+echo "Creating reports directory..."
+mkdir -p reports/pytest
+mkdir -p reports/flake
+
+# Run autopep8
+echo "Running autopep8..."
+autopep8 --in-place --aggressive --max-line-length=88 --ignore=E203 src/**/*.py
+
+# Run flake8 and generate HTML report
+echo "Running flake8..."
+flake8 src/ --max-line-length=88 --extend-ignore=E203 --format=html --htmldir=reports/flake || { echo "Flake8 checks failed!"; exit 1; }
+
+# Run pytest and generate HTML report
+echo "Running pytest..."
+pytest src/ --verbose --html=reports/pytest/report.html --self-contained-html || { echo "Pytest checks failed!"; exit 1; }
+
+# Install pre-commit hook
 echo "Installing pre-commit hook..."
 pre-commit install
 
-# Запуск усіх перевірок через pre-commit
+# Run pre-commit checks
 echo "Running pre-commit checks..."
-pre-commit run --all-files
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}All checks passed successfully!${NC}"
-else
-    echo -e "${RED}Checks failed!${NC}"
-    exit 1
-fi
-
-echo -e "${GREEN}Pipeline completed successfully!${NC}"
+pre-commit run --all-files || { echo "Pre-commit checks failed!"; exit 1; }

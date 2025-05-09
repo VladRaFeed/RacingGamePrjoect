@@ -1,12 +1,11 @@
+from score.savescore import show_save_screen
+from enemy.enemy import Enemy
+from player.player import Player
+import score.score as score
 import pygame
-import time
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import score.score as score
-from player.player import Player
-from enemy.enemy import Enemy
-from score.savescore import show_save_screen
 
 
 def start_game():
@@ -14,8 +13,6 @@ def start_game():
 
     FPS = pygame.time.Clock()
 
-    screen_width = 800
-    screen_hight = 600
     size = [800, 600]
     game_score = 0
 
@@ -24,13 +21,13 @@ def start_game():
     white = (255, 255, 255)
 
     screen = pygame.display.set_mode(size)
-    pygame.display.set_caption("Гонки") 
+    pygame.display.set_caption("Гонки")
     back_picture = pygame.image.load("src/img/game_back.jpg")
     transform_back_picture = pygame.transform.scale(back_picture, (800, 600))
     back_y = 0
 
     Pl = Player()
-    En = Enemy()   
+    En = Enemy()
     score_board = score.Scoreboard()
 
     all_enemies = pygame.sprite.Group()
@@ -40,7 +37,7 @@ def start_game():
     all_cars.add(Pl)
     all_cars.add(En)
 
-    while True: 
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
