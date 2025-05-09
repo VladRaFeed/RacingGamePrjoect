@@ -44,21 +44,9 @@ def start_menu():
 
     screen = pygame.display.set_mode((screen_width, screen_height))
 
-    color = (255, 255, 255)
-
-    light = (170, 170, 170)
-
-    dark = (100, 100, 100)
-
     width = screen.get_width()
 
     height = screen.get_height()
-
-    small_font = pygame.font.SysFont('Arial', 35)
-
-    text_play = small_font.render('Play!', True, color)
-    text_score = small_font.render('Score', True, color)
-    text_quit = small_font.render('Quit', True, color)
 
     def scene1():
         running = True
