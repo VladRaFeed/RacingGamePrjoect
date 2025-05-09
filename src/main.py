@@ -1,5 +1,3 @@
-def main():
-    print("Main func!")
+from menu.main_menu import start_menu
 
-if __name__ == "__main__":
-    main()
+start_menu()
