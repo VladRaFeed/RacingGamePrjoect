@@ -2,8 +2,7 @@ import pygame
 import random
 
 screen_width = 800
-screen_hight = 600
-size = [800, 600]
+screen_height = 600
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
@@ -16,8 +15,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.move_ip(0, 10)
-        if (self.rect.top > 600):
+        if (self.rect.top > screen_height):
             self.game_score += 1
             self.rect.top = 0
             self.rect.center = ((random.randint(120, (screen_width-120))), 0)
-            # print(self.game_score)
