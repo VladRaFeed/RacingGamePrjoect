@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 def show_save_screen(screen, score_value, score_board):
     from menu.main_menu import start_menu
+    
     input_box = pygame.Rect(300, 250, 200, 50)
     font = pygame.font.SysFont("Arial", 30)
     color_inactive = pygame.Color('lightskyblue3')
