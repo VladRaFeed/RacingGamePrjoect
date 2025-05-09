@@ -55,6 +55,7 @@ def start_menu():
                     #Play action
                     if width/2-90 <= mouse[0] <= width/2+50 and height/2-60 <= mouse[1] <= height/2-20:
                         start_game()
+                        running = False
                     #Score action
                     if width/2-90 <= mouse[0] <= width/2+50 and height/2+10 <= mouse[1] <= height/2+50:
                         switch_scene(scene2)
