@@ -77,6 +77,7 @@ def start_menu():
 
 
             screen.blit(transform_back_picture, (0,0))
+            mouse = pygame.mouse.get_pos()
 
             
             play_btn = pygame.Rect(width/2-90, height/2-60, 180, 50)
