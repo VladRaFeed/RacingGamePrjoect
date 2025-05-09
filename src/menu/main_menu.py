@@ -6,6 +6,28 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from score.score import Scoreboard
 from game.game import start_game
 
+def draw_button(surface, rect, text, is_hovered):
+    border_radius = 12
+    border_color = (200, 200, 200)
+    border_width = 2
+    shadow_offset = 4
+    shadow_color = (50, 50, 50)
+    bg_color = (170, 170, 170) if is_hovered else (100, 100, 100)
+    text_color = (255, 255, 255)
+
+    shadow_rect = rect.move(shadow_offset, shadow_offset)
+    pygame.draw.rect(surface, shadow_color, shadow_rect, border_radius=border_radius)
+
+    pygame.draw.rect(surface, bg_color, rect, border_radius=border_radius)
+
+    pygame.draw.rect(surface, border_color, rect, border_width, border_radius=border_radius)
+
+    font = pygame.font.SysFont('Arial', 35)
+    text_surf = font.render(text, True, text_color)
+    text_rect = text_surf.get_rect(center=rect.center)
+    surface.blit(text_surf, text_rect)
+
+
 current_scene = None
 
 def switch_scene(scene):
@@ -49,8 +71,6 @@ def start_menu():
                     switch_scene(None)
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    print("down")
-                    print(mouse)
 
                     #Play action
                     if width/2-90 <= mouse[0] <= width/2+50 and height/2-60 <= mouse[1] <= height/2-20:
@@ -63,37 +83,20 @@ def start_menu():
                     #Quit action
                     if width/2-90 <= mouse[0] <= width/2+50 and height/2+80 <= mouse[1] <= height/2+120:
                         pygame.quit()
+                        sys.exit()
 
 
-            screen.fill((0,0,0))
+            screen.fill((30,30,30))
 
             mouse = pygame.mouse.get_pos()
-        
-            #play btn
-            if width/2-90 <= mouse[0] <= width/2+50 and height/2-60 <= mouse[1] <= height/2-20:
-                pygame.draw.rect(screen, light, [width/2-90, height/2-60, 140, 40])
             
-            else:
-                pygame.draw.rect(screen, dark, [width/2-90, height/2-60, 140, 40])
+            play_btn = pygame.Rect(width/2-90, height/2-60, 180, 50)
+            score_btn = pygame.Rect(width/2-90, height/2+10, 180, 50)
+            quit_btn = pygame.Rect(width/2-90, height/2+80, 180, 50)
 
-            #Score btn
-            if width/2-90 <= mouse[0] <= width/2+50 and height/2+10 <= mouse[1] <= height/2+50:
-                pygame.draw.rect(screen, light, [width/2-90, height/2+10, 140, 40])
-            
-            else:
-                pygame.draw.rect(screen, dark, [width/2-90, height/2+10, 140, 40])
-
-            #quit btn
-            if width/2-90 <= mouse[0] <= width/2+50 and height/2+80 <= mouse[1] <= height/2+120:  
-                pygame.draw.rect(screen, light, [width/2-90, height/2+80, 140, 40])  
-                
-            else:  
-                pygame.draw.rect(screen, dark, [width/2-90, height/2+80, 140, 40])
-
-
-            screen.blit(text_play, (width/2-50, height/2-60))
-            screen.blit(text_score, (width/2-60, height/2+10))
-            screen.blit(text_quit, (width/2-50, height/2+80 ))
+            draw_button(screen, play_btn, "Play!", play_btn.collidepoint(mouse))
+            draw_button(screen, score_btn, "Score", score_btn.collidepoint(mouse))
+            draw_button(screen, quit_btn, "Quit", quit_btn.collidepoint(mouse))
 
             pygame.display.update()
             
