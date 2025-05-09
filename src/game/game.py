@@ -18,8 +18,6 @@ def start_game():
 
     score_font = pygame.font.SysFont("elephant", 50)
 
-    white = (255, 255, 255)
-
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Гонки")
     back_picture = pygame.image.load("src/img/game_back.jpg")

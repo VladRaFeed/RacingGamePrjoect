@@ -68,7 +68,8 @@ def test_save_score_different_ids(mock_collection, mock_random, scoreboard):
 @patch("pygame.Surface")
 @patch("pygame.draw.line")
 def test_draw_renders_correctly(
-        mock_draw_line, mock_surface, mock_small_font, mock_font, mock_set_mode, scoreboard):
+        mock_draw_line, mock_surface, mock_small_font, 
+        mock_font, mock_set_mode, scoreboard):
     """Перевіряє, що draw викликає правильні методи рендерингу."""
     mock_screen = Mock()
     mock_set_mode.return_value = mock_screen
