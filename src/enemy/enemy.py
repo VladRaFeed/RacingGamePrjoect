@@ -20,3 +20,4 @@ class Enemy(pygame.sprite.Sprite):
             self.game_score += 1
             self.rect.top = 0
             self.rect.center = ((random.randint(120, (screen_width - 120))), 0)
+            print(123)
